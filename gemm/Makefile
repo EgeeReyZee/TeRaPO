@@ -1,32 +1,20 @@
-# Путь к корню проекта (относительно папки gemm)
-PROJECT_ROOT = ..
-OPENBLAS_DIR = $(PROJECT_ROOT)/OpenBLAS-bin
-
-CC      = gcc
-CFLAGS  = -Wall -Wextra -O3 -pthread -I$(OPENBLAS_DIR)/include
-# Для Windows указываем путь к .lib или .a и линкуем саму библиотеку
-LDFLAGS = -L$(OPENBLAS_DIR)/lib -lopenblas -lm
-
-NTHREADS ?= 1
-
-TARGET = gemm_benchmark
-SRC    = main.c
-
-.PHONY: all run clean
+# Makefile для gemm
+CC = gcc
+CFLAGS = -O2 -march=native -Wall -I../OpenBLAS-bin/include
+LDFLAGS = -L../OpenBLAS-bin/lib -lopenblas -lm
+TARGET = gemm_test
+OBJS = main.o
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-  $(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+$(TARGET): $(OBJS)
+	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
-run: all
-  @echo "======================================================"
-  @echo "Запуск бенчмарка GEMM"
-  @echo "OpenBLAS threads: $(NTHREADS)"
-  @echo "======================================================"
-  @# В Windows PowerShell переменные окружения ставятся так:
-  @$env:OPENBLAS_NUM_THREADS=$(NTHREADS); $env:OMP_NUM_THREADS=$(NTHREADS); ./$(TARGET)
-  @echo "======================================================"
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
 
 clean:
-  rm -f $(TARGET).exe
+	del /Q $(OBJS) $(TARGET).exe 2>nul || rm -f $(OBJS) $(TARGET)
+
+run: $(TARGET)
+	$(TARGET).exe
