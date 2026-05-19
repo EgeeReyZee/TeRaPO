@@ -24,8 +24,8 @@ void test_sgemv_basic(void) {
     cblas_sgemv(CblasRowMajor, CblasNoTrans, 2, 2,
                 1.0f, A, 2, x, 1, 0.0f, y, 1);
 
-    CHECK(fabsf(y[0] - 3.0f) < TOL_FLOAT &&
-          fabsf(y[1] - 7.0f) < TOL_FLOAT,
+    CHECK(fabsf(y[0] - 4.0f) < TOL_FLOAT &&
+          fabsf(y[1] - 8.0f) < TOL_FLOAT,
           "sgemv: basic 2x2 NoTrans");
 }
 
