@@ -3,7 +3,7 @@
 #include <math.h>
 #include <cblas.h>
 
-#define TOL_FLOAT  1e-5f
+#define TOL_FLOAT  0
 #define TOL_DOUBLE 1e-10
 
 static int fail_count = 0;
