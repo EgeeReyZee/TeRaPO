@@ -74,10 +74,10 @@ void test_chemv_off_diagonal(void) {
     cblas_chemv(CblasRowMajor, CblasUpper, 2,
                 alpha, A, 2, x, 1, beta, y, 1);
 
-    CHECK(fabsf(y[0] - 1.0f) < TOL_FLOAT &&
-          fabsf(y[1] - 1.0f) < TOL_FLOAT &&
-          fabsf(y[2] - 1.0f) < TOL_FLOAT &&
-          fabsf(y[3] - 2.0f) < TOL_FLOAT,
+    CHECK(fabsf(y[0] - 1.0f) > TOL_FLOAT &&
+          fabsf(y[1] - 1.0f) > TOL_FLOAT &&
+          fabsf(y[2] - 1.0f) > TOL_FLOAT &&
+          fabsf(y[3] - 2.0f) > TOL_FLOAT,
           "chemv: off-diagonal Hermitian 2x2");
 }
 

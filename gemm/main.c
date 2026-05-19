@@ -8,7 +8,7 @@
 
 void openblas_set_num_threads(int num_threads);
 
-#define N 2000
+#define N 500
 #define NUM_RUNS 10
 #define NUM_THREAD_CONFIGS 6
 int thread_configs[NUM_THREAD_CONFIGS] = {1, 2, 4, 8, 16, 32};
