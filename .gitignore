@@ -2,3 +2,4 @@ test_*
 !tests/test_*.c
 *.zip
 *.exe
+*.o

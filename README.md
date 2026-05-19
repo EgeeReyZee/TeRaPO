@@ -12,3 +12,12 @@ cd ./tests
 # Запустить все тесты
 make run
 ```
+
+
+Директория gemm для сравнения производительности самописного gemm и gemm из OpenBLAS.
+## Запуск
+```
+gcc -O3 -march=native -mtune=native -mfma -mavx2 -pthread main.c -I"../OpenBLAS-bin/include" -L"../OpenBLAS-bin/lib" -lopenblas -o gemm_bench.exe
+
+./gemm_bench.exe
+```
