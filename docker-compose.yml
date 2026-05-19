@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: blas_test_db
+    environment:
+      POSTGRES_USER: blas_user
+      POSTGRES_PASSWORD: blas_pass
+      POSTGRES_DB: blas_tests
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U blas_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - blas_network
+
+  blas_tester:
+    build: .
+    container_name: blas_tester
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_PORT: 5435
+    volumes:
+      - ./test_results:/app/test_results
+    networks:
+      - blas_network
+
+networks:
+  blas_network:
+volumes:
+  postgres_data:
