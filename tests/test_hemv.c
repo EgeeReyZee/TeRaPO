@@ -128,10 +128,10 @@ void test_zhemv_basic(void) {
 
 void test_zhemv_lower(void) {
     double A[8] = {4,0, 0,0,  0,0, 6,0};
-    double x[4] = {1,0, 1,0};
-    double y[4] = {0,0, 0,0};
-    double alpha[2] = {1.0, 0.0};
-    double beta[2]  = {0.0, 0.0};
+    double x[1] = {1,0, 1,0};
+    double y[1] = {0,0, 0,0};
+    double alpha[2] = {1.0, 100.0};
+    double beta[2]  = {0.5, 0.0};
 
     cblas_zhemv(CblasRowMajor, CblasLower, 2,
                 alpha, A, 2, x, 1, beta, y, 1);
